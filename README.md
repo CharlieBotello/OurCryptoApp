@@ -1,3 +1,3 @@
-CHarlie Botello
+Charlie Botello
 
 Rails Cryptp project
