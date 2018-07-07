@@ -1,14 +1,14 @@
 class HomeController < ApplicationController
-  require 'net/http'
-  require 'json'
+  # require 'net/http'
+  # require 'json'
   def index
-    # require 'net/http'
-    # require 'json'
+    require 'net/http'
+    require 'json'
 
     @url = 'https://api.coinmarketcap.com/v1/ticker/'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
-    @coin = JSON.parse(@response)
+    @coins = JSON.parse(@response)
     @my_coins = ["BTC", "XRP", "ADA", "XLM", "STEEM"]
   end
   def about
@@ -16,6 +16,8 @@ class HomeController < ApplicationController
   end
 
   def lookup
+    require 'net/http'
+    require 'json'
     @url = 'https://api.coinmarketcap.com/v1/ticker/'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
