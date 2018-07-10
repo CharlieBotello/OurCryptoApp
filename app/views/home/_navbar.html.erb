@@ -15,13 +15,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "About us", home_about_path %></li>
-        <li><%= link_to "Lookup", home_lookup_path %></li>
+        <li><a href="https://charliebotello.github.io/" target="_blank">About Charlie</a></li> 
+        <li><%= link_to "Lookup", home_lookup_path %></li> 
 
         <% if user_signed_in? %>
           <li><%= link_to "List Cryptos", cryptos_path %></li>
           <li><%= link_to "Add New", new_crypto_path %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+          <li><%= link_to "Edit profile", edit_user_registration_path %></li> 
         <% else %>
           <li><%= link_to "Signup", new_user_registration_path %></li>
           <li><%= link_to "Log in", new_user_session_path %></li>

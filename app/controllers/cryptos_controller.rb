@@ -6,7 +6,16 @@ class CryptosController < ApplicationController
   # GET /cryptos
   # GET /cryptos.json
   def index
+    name = @cryptos.user.full_name
     @cryptos = Crypto.all
+    # require 'net/http'
+    # require 'json'
+    @url = 'https://api.coinmarketcap.com/v1/ticker/'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @lookup_crypto = JSON.parse(@response)
+    @profit_loss = 0 
+
   end
 
   # GET /cryptos/1

@@ -1,35 +1,55 @@
 
-
-<h1>Cryptos</h1>
+<h1>Listing Cryptos</h1>
 </br>
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th>Symbol</th>
-      <th>Cost per</th>
-      <th>Amount owned</th>
-      <th colspan="3"></th>
+      <th>Name</th>
+      <th>Current Price</th>
+      <th>Rank</th>
+      <th>1 Hr %</th>
+      <th>24 Hr %</th>
+      <th>7 Day %</th>
+      <th>Current Value</th>
+      <th>Total Paid</th>
+      <th>Profit/Loss</th>
+      <th>Cost Paid Per</th>
+      <th>Amount Owned</th>
     </tr>
   </thead>
 
   <tbody>
     <% @cryptos.each do |crypto| %>
       <% if crypto.user_id == current_user.id %>
+        <% if crypto.symbol %>
+          <% crypto.symbol = crypto.symbol.upcase %>
+        <% end %>
         <tr>
-          <td><%= crypto.symbol %></td>
-          <td><%= crypto.cost_per %></td>
+        <% for x in @lookup_crypto %>
+          <% if crypto.symbol == x["symbol"] %>
+            <td><%= link_to x["name"], crypto %></td>
+            <td>$<%=  x["price_usd"] %></td>
+            <td><%= x["rank"] %></td>
+            <td><%= x["percent_change_1h"] %>%</td>
+            <td><%= x["percent_change_24h"] %>%</td>
+            <td><%= x["percent_change_7d"] %>%</td>
+
+            <td>$<%= total = x["price_usd"].to_d * crypto.amount_owned.to_d %></td>
+            <td>$<%= (crypto.cost_per.to_d * crypto.amount_owned.to_d) %></td>
+            <td>$<%= @profit_loss +=  (x["price_usd"].to_d * crypto.amount_owned.to_d) - (crypto.cost_per.to_d * crypto.amount_owned.to_d) %></td>
+          <% end %>
+        <% end %>
+          <td>$<%= crypto.cost_per %></td>
           <td><%= crypto.amount_owned %></td>
-          <td><%= link_to 'Show', crypto %></td>
-          <td><%= link_to 'Edit', edit_crypto_path(crypto) %></td>
-          <td><%= link_to 'Destroy', crypto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
 
-<br>
-<div class="crypto-index-button">
-  
+<br/>
+<br/>
+<strong>Portfolio Profit/Loss: </strong><%=  number_to_currency(@profit_loss) %>
+<br/><br/>
 <h1><%= link_to 'New Crypto', new_crypto_path, class: "btn btn-default" %></h1>
-</div>
+

@@ -11,6 +11,10 @@
 </p>
 
 <p>
+  <strong>Name:</strong>
+  <%= current_user.full_name %>
+</p>
+<p>
   <strong>Cost per:</strong>
   <%= @crypto.cost_per %>
 </p>
@@ -20,5 +24,7 @@
   <%= @crypto.amount_owned %>
 </p>
 
+
 <%= link_to 'Edit', edit_crypto_path(@crypto) %> |
-<%= link_to 'Back', cryptos_path %>
+<%= link_to 'Delete Crypto Currency', crypto_path(@crypto), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', cryptos_path %> 
