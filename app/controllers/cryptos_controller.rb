@@ -1,15 +1,15 @@
 class CryptosController < ApplicationController
+
   before_action :set_crypto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update, :destroy, :show]
-
   # GET /cryptos
   # GET /cryptos.json
   def index
-    name = @cryptos.user.full_name
+    require 'net/http'
+    require 'json'
     @cryptos = Crypto.all
-    # require 'net/http'
-    # require 'json'
+
     @url = 'https://api.coinmarketcap.com/v1/ticker/'
     @uri = URI(@url)
     @response = Net::HTTP.get(@uri)
@@ -21,6 +21,15 @@ class CryptosController < ApplicationController
   # GET /cryptos/1
   # GET /cryptos/1.json
   def show
+    @cryptos = Crypto.all
+    require 'net/http'
+    require 'json'
+    @url = 'https://api.coinmarketcap.com/v1/ticker/'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri)
+    @show_crypto = JSON.parse(@response)
+    
+
   end
 
   # GET /cryptos/new

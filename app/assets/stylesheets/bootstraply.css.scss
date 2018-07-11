@@ -21,3 +21,19 @@
 .crypto-index-button {
   
 }
+.showing {
+  background-image: asset-url("profile.png");
+}
+
+#jumbo-show  {
+  background-image: asset-url("blue.png");
+  background-size: cover;
+  height: 600px;
+}
+
+
+.panel-default {
+  width: 75%;
+  background-image: asset-url("crypto3.png");
+
+}
