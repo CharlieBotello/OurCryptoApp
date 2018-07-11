@@ -1,18 +1,45 @@
-<h3>Crypto Currency Lookup</h3>
-<br/>
 
-<%= form_tag home_lookup_path, :method => 'POST' do %>
-  <%= text_field_tag 'sym', nil, placeholder: 'Enter Crypto Symbol', size: 50 %>
-  <%= submit_tag 'Lookup Stock Quote' %>
-<% end %>
 
-<br><br/>
+
    
-<% if @symbol %>
-  <% for x in @lookup_coin %>
-    <% if @symbol == x["symbol"] %>
-      <%= x["name"] %>: $<%= x["price_usd"] %><br/>
-      Rank: <%= x["rank"] %><br/><br/>
-    <% end %>
-  <% end %>
-<% end %>
+
+<div align="center">
+  <div class="showing">
+  <div align="center" id="jumbo-show" class="jumbotron">
+    <div  class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Crypto Currency Lookup</h2>
+      </div>
+      <br/>
+      <div class="panel-body">
+        <%= form_tag home_lookup_path, :method => 'POST' do %>
+          <%= text_field_tag 'sym', nil, placeholder: 'Enter Crypto Symbol', size: 50 %>
+          <%= submit_tag 'Lookup Stock Quote' %>
+        <% end %>
+
+        <br/><br/>
+        <br/><br/>
+        <% if @symbol %>
+          <% for x in @lookup_coin %>
+            <% if @symbol == x["symbol"] %>
+              <%= x["name"] %>: <%= number_to_currency(x["price_usd"]) %><br/>
+              Rank: <%= x["rank"] %><br/>
+              Pice to bitcoin: ₿<%= x["price_btc"] %> 
+            <% end %>
+          <% end %>
+        <% end %>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>
+
+
+        
+     
+        
+
+     
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
